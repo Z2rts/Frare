@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, Image, Text } from 'react-native';
+import idNearby from './Test';
 
 const Simbols = () => {
   const URL = 'https://static-m.meteo.cat/content/opendata/dadesobertes_pg.json'
-  //const [simbol, setSimbol] = useState()
   const [imgSimbol, setImgSimbol] = useState(null)
   const [textSimbol, setTextSimbol] = useState(null)
 
@@ -46,14 +46,14 @@ const Simbols = () => {
     '29': ('xàfec'),'30': ('aiguaneu'),'31': ('ruixat'),'32': ('plugim')
   }
 
+  let id = idNearby();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(URL, { method: 'GET' });
         const data = await response.json();
-        const codi = data[1].versio.tarda.simbols.estatDelCel[8].codi
-        // setSimbol(codi)
-
+        const codi = data[1].versio.tarda.simbols.estatDelCel[id].codi
         setImgSimbol(simbolImgMap[codi])
         setTextSimbol(simbolsTextMap[codi])
       } catch (error) {
@@ -61,10 +61,7 @@ const Simbols = () => {
       }
     };
     fetchData();
-  }, [])
-
-  //console.log('SIMBOL', simbol)
-  //console.log('IMGSSIMBOL', imgSimbol)
+  }, [id])
 
   return (
     <>
@@ -81,8 +78,10 @@ export default Simbols;
 
 const styles = StyleSheet.create({
   image: {
-    width: 600,
-    height: 600
+    width: 500, 
+    height: 500,
+    position: 'relative',
+    top: '7%'
   },
   text: {
     textAlign: 'center',

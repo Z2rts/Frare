@@ -53,15 +53,9 @@ const PrediccioComponent = () => {
   };
 
   return (
-    <View>
+    <View style={styles.containerBox}>
       <FlatList
-        data={data.length >= 2 ? [data[1]] : []}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={renderItem}
-        style={styles.text}
-      />
-      <FlatList
-        data={data.length >= 2 ? [data[2]] : []}
+        data={data.length >= 2 ? [data[1], data[2]] : []}
         keyExtractor={(item, index) => index.toString()}
         renderItem={renderItem}
         style={styles.text}
@@ -81,9 +75,9 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   text: {
+    marginTop: '5%',
     color: 'black',
-    fontSize: 20,
-    //fontWeight: 20
+    fontSize: 20
   },
   textProveidor: {
     padding: 30
